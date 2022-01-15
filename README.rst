@@ -1,7 +1,3 @@
-.. image:: https://readthedocs.org/projects//badge/?version=latest
-    :target: https://.readthedocs.io/index.html
-    :alt: Documentation Status
-
 .. image:: https://github.com/MacHu-GWU/aws_lambda_event-project/workflows/CI/badge.svg
     :target: https://github.com/MacHu-GWU/aws_lambda_event-project/actions?query=workflow:CI
 
