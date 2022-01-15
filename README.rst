@@ -18,16 +18,6 @@
 
 ------
 
-
-.. image:: https://img.shields.io/badge/Link-Document-blue.svg
-    :target: https://.readthedocs.io/index.html
-
-.. image:: https://img.shields.io/badge/Link-API-blue.svg
-    :target: https://.readthedocs.io/py-modindex.html
-
-.. image:: https://img.shields.io/badge/Link-Source_Code-blue.svg
-    :target: https://.readthedocs.io/py-modindex.html
-
 .. image:: https://img.shields.io/badge/Link-Install-blue.svg
     :target: `install`_
 
