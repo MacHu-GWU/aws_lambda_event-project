@@ -1,4 +1,3 @@
-
 .. image:: https://readthedocs.org/projects//badge/?version=latest
     :target: https://.readthedocs.io/index.html
     :alt: Documentation Status
@@ -52,7 +51,35 @@
 Welcome to ``aws_lambda_event`` Documentation
 ==============================================================================
 
-Documentation for ``aws_lambda_event``.
+This library provides Python Class interface, attribute auto-complete, type hint for AWS Lambda Events.
+
+Example:
+
+.. code-block:: python
+
+    # An example lambda handler python module
+    import aws_lambda_event
+
+    # example S3 Put event
+    def handler(event, context):
+        event_obj = aws_lambda_event.S3PutEvent(**event)
+
+        for record in event_obj.records:
+            # access attribute
+            _ = record.eventTime
+
+            # important attributes quick access alias
+            _ = record.bucket
+            _ = record.key
+            _ = record.etag
+            _ = record.size
+            ...
+
+
+You can find the event JSON schema in two place:
+
+1. AWS Lambda Event Source Mapping Official Document: https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventsourcemapping.html
+2. Goto AWS Lambda Function Console -> Create Test Event -> Choose from Event template
 
 
 .. _install:
