@@ -60,3 +60,7 @@ class S3PutRecord(AttrsClass):
 @attr.s
 class S3PutEvent(AttrsClass):
     Records: typing.List[S3PutRecord] = S3PutRecord.ib_list_of_nested()
+
+    @property
+    def records(self) -> typing.List[S3PutRecord]:
+        return self.Records
