@@ -48,7 +48,7 @@ Example:
 
     # example S3 Put event
     def handler(event, context):
-        event_obj = aws_lambda_event.S3PutEvent(**event)
+        event_obj = aws_lambda_event.S3PutEvent(event)
 
         for record in event_obj.records:
             # access attribute
