@@ -46,7 +46,7 @@ class TestS3PutEvent:
         event = S3DeleteEvent(self.data)
         record = event.records[0]
 
-        _ = record.event_datetimeR
+        _ = record.event_datetime
         _ = record.bucket
         _ = record.key
 
