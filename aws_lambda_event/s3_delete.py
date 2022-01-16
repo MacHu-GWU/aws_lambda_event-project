@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import typing
+from datetime import datetime
 
 
 class Bucket:
@@ -35,6 +36,10 @@ class S3DeleteRecord:
         self.request_parameters: dict = data.get("requestParameters", dict())
         self.response_elements: dict = data.get("responseElements", dict())
         self.s3: S3 = S3(data.get("s3", dict()))
+
+    @property
+    def event_datetime(self) -> datetime:
+        return datetime.strptime(self.event_time, "%Y-%m-%dT%H:%M:%S.%fZ")
 
     @property
     def bucket(self) -> str:

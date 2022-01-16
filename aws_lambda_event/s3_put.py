@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import typing
+from datetime import datetime
 
 
 class Bucket:
@@ -37,6 +38,10 @@ class S3PutRecord:
         self.request_parameters: dict = data.get("requestParameters")
         self.response_elements: dict = data.get("responseElements")
         self.s3: S3 = S3(data.get("s3", dict()))
+
+    @property
+    def event_datetime(self) -> datetime:
+        return datetime.strptime(self.event_time, "%Y-%m-%dT%H:%M:%S.%fZ")
 
     @property
     def bucket(self) -> str:
