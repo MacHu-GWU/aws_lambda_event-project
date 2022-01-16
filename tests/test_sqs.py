@@ -27,7 +27,7 @@ class TestSQSEvent:
     }
 
     def test(self):
-        event = SQSEvent(**self.data)
+        event = SQSEvent(self.data)
         _ = event.records[0]
 
 

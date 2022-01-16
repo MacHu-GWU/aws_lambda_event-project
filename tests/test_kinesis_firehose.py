@@ -19,10 +19,10 @@ class TestKinesisFirehoseEvent:
     }
 
     def test(self):
-        event = KinesisFirehoseEvent(**self.data)
+        event = KinesisFirehoseEvent(self.data)
         record = event.records[0]
         _ = record.binary_data
-        _ = record.approximate_arrival_time
+        _ = record.approximate_arrival_datetime
 
 
 if __name__ == "__main__":

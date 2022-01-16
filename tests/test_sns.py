@@ -38,11 +38,11 @@ class TestSNSTopicNotificationEvent:
     }
 
     def test(self):
-        event = SNSTopicNotificationEvent(**self.data)
+        event = SNSTopicNotificationEvent(self.data)
         record = event.records[0]
         _ = record.message
         _ = record.subject
-        _ = record.timestamp
+        _ = record.datetime
 
 
 if __name__ == "__main__":

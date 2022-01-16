@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from aws_lambda_event.s3_put import S3PutEvent
+from aws_lambda_event.s3_delete import S3DeleteEvent
 
 
 class TestS3PutEvent:
@@ -12,7 +12,7 @@ class TestS3PutEvent:
                 "eventSource": "aws:s3",
                 "awsRegion": "us-east-1",
                 "eventTime": "1970-01-01T00:00:00.000Z",
-                "eventName": "ObjectCreated:Put",
+                "eventName": "ObjectRemoved:Delete",
                 "userIdentity": {
                     "principalId": "EXAMPLE"
                 },
@@ -35,8 +35,6 @@ class TestS3PutEvent:
                     },
                     "object": {
                         "key": "test%2Fkey",
-                        "size": 1024,
-                        "eTag": "0123456789abcdef0123456789abcdef",
                         "sequencer": "0A1B2C3D4E5F678901"
                     }
                 }
@@ -45,13 +43,11 @@ class TestS3PutEvent:
     }
 
     def test(self):
-        event = S3PutEvent(self.data)
+        event = S3DeleteEvent(self.data)
         record = event.records[0]
 
         _ = record.bucket
         _ = record.key
-        _ = record.etag
-        _ = record.size
 
 
 if __name__ == "__main__":

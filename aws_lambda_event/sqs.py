@@ -1,27 +1,24 @@
 # -*- coding: utf-8 -*-
 
 import typing
-import attr
-from attrs_mate import AttrsClass
 
 
-@attr.s
-class SQSRecord(AttrsClass):
-    messageId: str = attr.ib()
-    receiptHandle: str = attr.ib()
-    body: str = attr.ib()
-    attributes: dict = attr.ib()
-    messageAttributes: dict = attr.ib()
-    md5OfBody: str = attr.ib()
-    eventSource: str = attr.ib()
-    eventSourceARN: str = attr.ib()
-    awsRegion: str = attr.ib()
+class SQSRecord:
+    def __init__(self, data: dict):
+        self.message_id: str = data.get("messageId")
+        self.receipt_handle: str = data.get("receiptHandle")
+        self.body: str = data.get("body")
+        self.attributes: dict = data.get("attributes")
+        self.message_attributes: dict = data.get("messageAttributes")
+        self.md5_of_body: str = data.get("md5OfBody")
+        self.event_source: str = data.get("eventSource")
+        self.event_source_arn: str = data.get("eventSourceARN")
+        self.aws_region: str = data.get("awsRegion")
 
 
-@attr.s
-class SQSEvent(AttrsClass):
-    Records: typing.List[SQSRecord] = SQSRecord.ib_list_of_nested()
-
-    @property
-    def records(self) -> typing.List[SQSRecord]:
-        return self.Records
+class SQSEvent:
+    def __init__(self, data: dict):
+        self.records: typing.List[SQSRecord] = [
+            SQSRecord(dct)
+            for dct in data.get("Records")
+        ]

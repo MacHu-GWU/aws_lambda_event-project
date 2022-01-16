@@ -1,48 +1,59 @@
 # -*- coding: utf-8 -*-
 
 import typing
-import attr
-from attrs_mate import AttrsClass
+from datetime import datetime
+from .helpers import datetime_from_timestamp
 
 
-@attr.s
-class DynamodbDetails(AttrsClass):
-    Keys: typing.Dict[str, typing.Dict[str, str]] = attr.ib(default=None)
-    NewImage: typing.Dict[str, typing.Dict[str, str]] = attr.ib(default=None)
-    OldImage: typing.Dict[str, typing.Dict[str, str]] = attr.ib(default=None)
-    ApproximateCreationDateTime: int = attr.ib(default=None)
-    SequenceNumber: dict = attr.ib(default=None)
-    SizeBytes: int = attr.ib(default=None)
-    StreamViewType: dict = attr.ib(default=None)
+class Dynamodb:
+    def __init__(self, data: dict):
+        self.keys: typing.Dict[str, typing.Dict[str, str]] = data.get("Keys", dict())
+        self.new_image: typing.Dict[str, typing.Dict[str, str]] = data.get("NewImage", dict())
+        self.old_image: typing.Dict[str, typing.Dict[str, str]] = data.get("OldImage", dict())
+        self.approximate_creation_timestamp: int = data.get("ApproximateCreationDateTime")
+        self.sequence_number: dict = data.get("SequenceNumber")
+        self.size_bytes: int = data.get("SizeBytes")
+        self.stream_view_type: dict = data.get("StreamViewType")
+
+    @property
+    def approximate_creation_datetime(self) -> datetime:
+        return datetime_from_timestamp(self.approximate_creation_timestamp)
 
 
-@attr.s
-class DynamodbUpdateRecord(AttrsClass):
-    eventID: str = attr.ib()
-    eventName: str = attr.ib()
-    eventVersion: str = attr.ib()
-    eventSource: str = attr.ib()
-    awsRegion: str = attr.ib()
-    eventSourceARN: str = attr.ib()
-    dynamodb: DynamodbDetails = DynamodbDetails.ib_nested()
+class DynamodbUpdateRecord:
+    def __init__(self, data: dict):
+        self.event_id: str = data.get("eventID")
+        self.event_name: str = data.get("eventName")
+        self.event_version: str = data.get("eventVersion")
+        self.event_source: str = data.get("eventSource")
+        self.aws_region: str = data.get("awsRegion")
+        self.event_source_arn: str = data.get("eventSourceARN")
+        self.dynamodb: Dynamodb = Dynamodb(data.get("dynamodb"))
 
     @property
     def keys(self) -> typing.Dict[str, typing.Dict[str, str]]:
-        return self.dynamodb.Keys
+        return self.dynamodb.keys
 
     @property
     def new_image(self) -> typing.Dict[str, typing.Dict[str, str]]:
-        return self.dynamodb.NewImage
+        return self.dynamodb.new_image
 
     @property
     def old_image(self) -> typing.Dict[str, typing.Dict[str, str]]:
-        return self.dynamodb.OldImage
-
-
-@attr.s
-class DynamodbUpdateEvent(AttrsClass):
-    Records: typing.List[DynamodbUpdateRecord] = DynamodbUpdateRecord.ib_list_of_nested()
+        return self.dynamodb.old_image
 
     @property
-    def records(self) -> typing.List[DynamodbUpdateRecord]:
-        return self.Records
+    def approximate_creation_timestamp(self) -> int:
+        return self.dynamodb.approximate_creation_timestamp
+
+    @property
+    def approximate_creation_datetime(self) -> datetime:
+        return self.dynamodb.approximate_creation_datetime
+
+
+class DynamodbUpdateEvent:
+    def __init__(self, data: dict):
+        self.records: typing.List[DynamodbUpdateRecord] = [
+            DynamodbUpdateRecord(dct)
+            for dct in data.get("Records")
+        ]

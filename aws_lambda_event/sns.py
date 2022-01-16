@@ -1,49 +1,51 @@
 # -*- coding: utf-8 -*-
 
 import typing
-import attr
-from attrs_mate import AttrsClass
+from datetime import datetime
 
 
-@attr.s
-class SNS(AttrsClass):
-    Type: str = attr.ib()
-    MessageId: str = attr.ib()
-    TopicArn: str = attr.ib()
-    Subject: str = attr.ib()
-    Message: str = attr.ib()
-    Timestamp: str = attr.ib()
-    SignatureVersion: str = attr.ib()
-    Signature: str = attr.ib()
-    SigningCertUrl: str = attr.ib()
-    UnsubscribeUrl: str = attr.ib()
-    MessageAttributes: dict = attr.ib()
+class SNS:
+    def __init__(self, data: dict):
+        self.type: str = data.get("Type")
+        self.message_id: str = data.get("MessageId")
+        self.topic_arn: str = data.get("TopicArn")
+        self.subject: str = data.get("Subject")
+        self.message: str = data.get("Message")
+        self.timestamp: str = data.get("Timestamp")
+        self.signature_version: str = data.get("SignatureVersion")
+        self.signature: str = data.get("Signature")
+        self.signing_cert_url: str = data.get("SigningCertUrl")
+        self.unsubscribe_url: str = data.get("UnsubscribeUrl")
+        self.message_attributes: dict = data.get("MessageAttributes")
+
+    @property
+    def datetime(self) -> datetime:
+        return datetime.strptime(self.timestamp, "%Y-%m-%dT%H:%M:%S.%fZ")
 
 
-@attr.s
-class SNSRecord(AttrsClass):
-    EventSource: str = attr.ib()
-    EventVersion: str = attr.ib()
-    EventSubscriptionArn: str = attr.ib()
-    Sns: SNS = SNS.ib_nested()
+class SNSRecord:
+    def __init__(self, data: dict):
+        self.event_source: str = data.get("EventSource")
+        self.event_version: str = data.get("EventVersion")
+        self.event_subscription_arn: str = data.get("EventSubscriptionArn")
+        self.sns: SNS = SNS(data.get("Sns", dict()))
 
     @property
     def message(self) -> str:
-        return self.Sns.Message
+        return self.sns.message
 
     @property
     def subject(self) -> str:
-        return self.Sns.Subject
+        return self.sns.subject
 
     @property
-    def timestamp(self) -> str:
-        return self.Sns.Timestamp
+    def datetime(self) -> datetime:
+        return self.sns.datetime
 
 
-@attr.s
-class SNSTopicNotificationEvent(AttrsClass):
-    Records: typing.List[SNSRecord] = SNSRecord.ib_list_of_nested()
-
-    @property
-    def records(self) -> typing.List[SNSRecord]:
-        return self.Records
+class SNSTopicNotificationEvent:
+    def __init__(self, data: dict):
+        self.records: typing.List[SNSRecord] = [
+            SNSRecord(dct)
+            for dct in data.get("Records")
+        ]

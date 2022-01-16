@@ -14,9 +14,11 @@ __github_username__ = "MacHu-GWU"
 
 try:
     from .s3_put import S3PutEvent
+    from .s3_delete import S3DeleteEvent
     from .sns import SNSTopicNotificationEvent
     from .sqs import SQSEvent
     from .dynamodb_update import DynamodbUpdateEvent
+    from .kinesis_stream import KinesisStreamEvent
     from .kinesis_firehose import KinesisFirehoseEvent
 except ImportError:  # pragma: no cover
     pass

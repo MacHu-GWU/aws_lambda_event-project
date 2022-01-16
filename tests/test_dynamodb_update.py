@@ -100,14 +100,16 @@ class TestDynamodbUpdateEvent:
     }
 
     def test(self):
-        event = DynamodbUpdateEvent(**self.data)
+        event = DynamodbUpdateEvent(self.data)
         record = event.records[1]
         _ = record.keys
         _ = record.old_image
         _ = record.new_image
+        _ = record.approximate_creation_timestamp
+        _ = record.approximate_creation_datetime
 
-        assert event.records[0].old_image is None
-        assert event.records[2].new_image is None
+        assert event.records[0].old_image == dict()
+        assert event.records[2].new_image == dict()
 
 
 if __name__ == "__main__":
