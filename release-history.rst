@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.3 (TODO)
+1.0.2 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -15,18 +15,19 @@ Release and Version History
 **Miscellaneous**
 
 
-0.0.2 (TODO)
+1.0.1 (2022-01-16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 **Features and Improvements**
 
-**Minor Improvements**
-
-**Bugfixes**
+- add ``S3PutEvent`` event object.
+- add ``S3DeleteEvent`` event object.
+- add ``SNSTopicNotificationEvent`` event object.
+- add ``SQSEvent`` event object.
+- add ``DynamodbUpdateEvent`` event object.
+- add ``KinesisStreamEvent`` event object.
+- add ``KinesisFirehoseEvent`` event object.
 
 **Miscellaneous**
 
-
-0.0.1 (2022-01-15)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-- First release
+- ``aws_lambda_event`` library 1.X.X aim to zero dependencies.
