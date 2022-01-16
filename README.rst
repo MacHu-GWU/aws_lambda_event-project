@@ -39,7 +39,7 @@ Welcome to ``aws_lambda_event`` Documentation
 
 This library provides Python Class interface, attribute auto-complete, type hint for AWS Lambda Events.
 
-Example:
+**Example**:
 
 .. code-block:: python
 
@@ -61,6 +61,16 @@ Example:
             _ = record.size
             ...
 
+
+**List of Supported Event**:
+
+- ``S3PutEvent``
+- ``S3DeleteEvent``
+- ``SNSTopicNotificationEvent``
+- ``SQSEvent``
+- ``DynamodbUpdateEvent``
+- ``KinesisStreamEvent``
+- ``KinesisFirehoseEvent``
 
 You can find the event JSON schema in two place:
 
