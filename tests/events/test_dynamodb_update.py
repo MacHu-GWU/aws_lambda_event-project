@@ -27,6 +27,10 @@ class TestDynamodbUpdateEvent:
         assert event.Records[0].old_image == dict()
         assert event.Records[2].new_image == dict()
 
+        assert event.Records[0].is_insert is True
+        assert event.Records[1].is_update is True
+        assert event.Records[2].is_delete is True
+
 
 if __name__ == "__main__":
     import os

@@ -70,6 +70,14 @@ class S3PutRecord(Base):
         return self.s3.object.key
 
     @property
+    def uri(self) -> str:
+        return f"s3://{self.bucket}/{self.key}"
+
+    @property
+    def arn(self) -> str:
+        return f"arn:aws:s3:::{self.bucket}/{self.key}"
+
+    @property
     def etag(self) -> str:
         return self.s3.object.eTag
 

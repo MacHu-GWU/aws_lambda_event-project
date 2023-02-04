@@ -15,6 +15,8 @@ class TestS3PutEvent:
         _ = record.event_datetime
         _ = record.bucket
         _ = record.key
+        _ = record.uri
+        _ = record.arn
         _ = record.etag
         _ = record.size
 

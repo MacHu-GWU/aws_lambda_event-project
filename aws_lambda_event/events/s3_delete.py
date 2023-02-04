@@ -68,12 +68,12 @@ class S3DeleteRecord(Base):
         return self.s3.object.key
 
     @property
-    def etag(self) -> str:
-        return self.s3.object.eTag
+    def uri(self) -> str:
+        return f"s3://{self.bucket}/{self.key}"
 
     @property
-    def size(self) -> int:
-        return self.s3.object.size
+    def arn(self) -> str:
+        return f"arn:aws:s3:::{self.bucket}/{self.key}"
 
 
 @dataclasses.dataclass

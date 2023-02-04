@@ -37,6 +37,18 @@ class DynamodbUpdateRecord(Base):
         self.dynamodb = Dynamodb.from_dict(self.dynamodb)
 
     @property
+    def is_insert(self) -> bool:
+        return self.eventName == "INSERT"
+
+    @property
+    def is_update(self) -> bool:
+        return self.eventName == "MODIFY"
+
+    @property
+    def is_delete(self) -> bool:
+        return self.eventName == "REMOVE"
+
+    @property
     def keys(self) -> T.Dict[str, T.Dict[str, str]]:
         return self.dynamodb.Keys
 
