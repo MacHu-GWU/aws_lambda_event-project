@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import typing
+import typing as T
 from datetime import datetime
 
 
@@ -62,7 +62,7 @@ class S3PutRecord:
 
 class S3PutEvent:
     def __init__(self, data: dict):
-        self.records: typing.List[S3PutRecord] = [
+        self.records: T.List[S3PutRecord] = [
             S3PutRecord(dct)
             for dct in data.get("Records")
         ]

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import typing
+import typing as T
 from datetime import datetime
 
 
@@ -52,7 +52,7 @@ class S3DeleteRecord:
 
 class S3DeleteEvent:
     def __init__(self, data: dict):
-        self.records: typing.List[S3DeleteRecord] = [
+        self.records: T.List[S3DeleteRecord] = [
             S3DeleteRecord(dct)
             for dct in data.get("Records")
         ]

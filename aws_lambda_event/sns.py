@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import typing
+import typing as T
 from datetime import datetime
 
 
@@ -45,7 +45,7 @@ class SNSRecord:
 
 class SNSTopicNotificationEvent:
     def __init__(self, data: dict):
-        self.records: typing.List[SNSRecord] = [
+        self.records: T.List[SNSRecord] = [
             SNSRecord(dct)
             for dct in data.get("Records")
         ]

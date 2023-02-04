@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import typing
+import typing as T
 import base64
 from datetime import datetime
 from .helpers import datetime_from_timestamp
@@ -53,7 +53,7 @@ class KinesisStreamRecord:
 
 class KinesisStreamEvent:
     def __init__(self, data: dict):
-        self.records: typing.List[KinesisStreamRecord] = [
+        self.records: T.List[KinesisStreamRecord] = [
             KinesisStreamRecord(dct)
             for dct in data.get("Records", [])
         ]

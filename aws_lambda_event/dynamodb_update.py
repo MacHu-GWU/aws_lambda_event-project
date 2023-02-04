@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
-import typing
+import typing as T
 from datetime import datetime
 from .helpers import datetime_from_timestamp
 
 
 class Dynamodb:
     def __init__(self, data: dict):
-        self.keys: typing.Dict[str, typing.Dict[str, str]] = data.get("Keys", dict())
-        self.new_image: typing.Dict[str, typing.Dict[str, str]] = data.get("NewImage", dict())
-        self.old_image: typing.Dict[str, typing.Dict[str, str]] = data.get("OldImage", dict())
+        self.keys: T.Dict[str, T.Dict[str, str]] = data.get("Keys", dict())
+        self.new_image: T.Dict[str, T.Dict[str, str]] = data.get("NewImage", dict())
+        self.old_image: T.Dict[str, T.Dict[str, str]] = data.get("OldImage", dict())
         self.approximate_creation_timestamp: int = data.get("ApproximateCreationDateTime")
         self.sequence_number: dict = data.get("SequenceNumber")
         self.size_bytes: int = data.get("SizeBytes")
@@ -31,15 +31,15 @@ class DynamodbUpdateRecord:
         self.dynamodb: Dynamodb = Dynamodb(data.get("dynamodb"))
 
     @property
-    def keys(self) -> typing.Dict[str, typing.Dict[str, str]]:
+    def keys(self) -> T.Dict[str, T.Dict[str, str]]:
         return self.dynamodb.keys
 
     @property
-    def new_image(self) -> typing.Dict[str, typing.Dict[str, str]]:
+    def new_image(self) -> T.Dict[str, T.Dict[str, str]]:
         return self.dynamodb.new_image
 
     @property
-    def old_image(self) -> typing.Dict[str, typing.Dict[str, str]]:
+    def old_image(self) -> T.Dict[str, T.Dict[str, str]]:
         return self.dynamodb.old_image
 
     @property
@@ -53,7 +53,7 @@ class DynamodbUpdateRecord:
 
 class DynamodbUpdateEvent:
     def __init__(self, data: dict):
-        self.records: typing.List[DynamodbUpdateRecord] = [
+        self.records: T.List[DynamodbUpdateRecord] = [
             DynamodbUpdateRecord(dct)
             for dct in data.get("Records")
         ]

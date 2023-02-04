@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import typing
+import typing as T
 
 
 class SQSRecord:
@@ -18,7 +18,7 @@ class SQSRecord:
 
 class SQSEvent:
     def __init__(self, data: dict):
-        self.records: typing.List[SQSRecord] = [
+        self.records: T.List[SQSRecord] = [
             SQSRecord(dct)
             for dct in data.get("Records")
         ]

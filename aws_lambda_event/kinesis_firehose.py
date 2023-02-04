@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import typing
+import typing as T
 import base64
 from datetime import datetime
 from .helpers import datetime_from_timestamp
@@ -26,7 +26,7 @@ class KinesisFirehoseEvent:
         self.invocationId: str = data.get("invocationId")
         self.deliveryStreamArn: str = data.get("deliveryStreamArn")
         self.region: str = data.get("region")
-        self.records: typing.List[KinesisFirehoseRecord] = [
+        self.records: T.List[KinesisFirehoseRecord] = [
             KinesisFirehoseRecord(dct)
             for dct in data.get("records", [])
         ]
