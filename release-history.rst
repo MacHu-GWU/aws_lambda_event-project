@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-1.0.2 (TODO)
+Backlog
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -15,9 +15,20 @@ Release and Version History
 **Miscellaneous**
 
 
+2.0.1 (2023-02-04)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Breaking Changes**
+
+- use ``dataclasses`` everywhere. The original initialization method ``Event(data: dict)`` no longer work. Now it use ``Event.from_dict(data: dict)`` for initialization.
+
+**Features and Improvements**
+
+- add ``CloudWatchLogsEvent`` event object.
+- add ``CloudWatchScheduledEvent`` event object.
+
+
 1.0.1 (2022-01-16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 **Features and Improvements**
 
 - add ``S3PutEvent`` event object.

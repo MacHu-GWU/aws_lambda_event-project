@@ -13,6 +13,8 @@ __author_email__ = "husanhe@gmail.com"
 __github_username__ = "MacHu-GWU"
 
 try:
+    from .events.cloudwatch_logs import CloudWatchLogsEvent
+    from .events.cloudwatch_scheduled_event import CloudWatchScheduledEvent
     from .events.s3_put import S3PutEvent
     from .events.s3_delete import S3DeleteEvent
     from .events.sns import SNSTopicNotificationEvent
