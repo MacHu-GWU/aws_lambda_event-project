@@ -15,6 +15,17 @@ Backlog
 **Miscellaneous**
 
 
+2.0.2 (2023-02-25)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Bugfixes**
+
+- add ``version`` field to ``CloudWatchScheduledEvent`` event object.
+
+**Miscellaneous**
+
+- update README
+
+
 2.0.1 (2023-02-04)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Breaking Changes**

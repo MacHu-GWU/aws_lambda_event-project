@@ -36,8 +36,7 @@
 
 Welcome to ``aws_lambda_event`` Documentation
 ==============================================================================
-
-This library provides Python Class interface, attribute auto-complete, type hint for AWS Lambda Events.
+This library provides Python Class interface, attribute auto-complete, type hint for AWS Lambda Events. It can parse the AWS Lambda event data, and also generate fake event data for testing.
 
 **Example**:
 
@@ -46,11 +45,11 @@ This library provides Python Class interface, attribute auto-complete, type hint
     # An example lambda handler python module
     import aws_lambda_event
 
-    # example S3 Put event
+    # parse S3 Put event, convert it into a python object with type hint, auto complete
     def handler(event, context):
-        event_obj = aws_lambda_event.S3PutEvent(event)
+        event_obj = aws_lambda_event.S3PutEvent.from_dict(event)
 
-        for record in event_obj.records:
+        for record in event_obj.Records:
             # access attribute
             _ = record.eventTime
 
@@ -61,9 +60,15 @@ This library provides Python Class interface, attribute auto-complete, type hint
             _ = record.size
             ...
 
+    # generate an fake event for testing
+    event_obj = aws_lambda_event.S3PutEvent.fake(bucket="my-bucket", key="my-file.txt")
+    ...
+
 
 **List of Supported Event**:
 
+- ``CloudWatchLogsEvent``
+- ``CloudWatchScheduledEvent``
 - ``S3PutEvent``
 - ``S3DeleteEvent``
 - ``SNSTopicNotificationEvent``

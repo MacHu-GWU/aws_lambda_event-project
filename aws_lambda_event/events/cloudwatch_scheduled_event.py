@@ -11,6 +11,7 @@ from ..base import Base
 @dataclasses.dataclass
 class CloudWatchScheduledEvent(Base):
     id: str = dataclasses.field(default=None)
+    version: str = dataclasses.field(default=None)
     detail_type: str = dataclasses.field(default=None)
     source: str = dataclasses.field(default=None)
     account: str = dataclasses.field(default=None)
